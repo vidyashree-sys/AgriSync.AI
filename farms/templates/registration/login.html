@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-4">
+        <div class="card shadow p-4 border-0" style="border-radius: 15px;">
+            <h3 class="text-center mb-4 text-success">AgriSync Login</h3>
+            
+            {% if form.errors %}
+                <div class="alert alert-danger small">Invalid username or password.</div>
+            {% endif %}
+
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Username</label>
+                    <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Password</label>
+                    <input type="password" name="password" class="form-control" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-success w-100 py-2 fw-bold">Login</button>
+            </form>
+            
+            <div class="text-center mt-3">
+                <p>New to AgriSync? <a href="{% url 'register' %}" class="text-success">Create Account</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+        
+        <div class="p-5 text-center {% if is_risky %}bg-warning text-dark{% else %}bg-success text-white{% endif %}">
+            <h1 class="display-4 fw-bold">Market Intelligence Report</h1>
+            <p class="lead">Sustainability Analysis: {{ farm.farm_name|default:"Your Farm" }}</p>
+        </div>
+
+        <div class="card-body p-5">
+            <div class="text-center mb-5">
+                <h5 class="fw-bold">Local Competition for {{ farm.intended_crop|default:"Selected Crop" }}</h5>
+                <div class="progress mt-3" style="height: 35px; border-radius: 20px; background-color: #f1f1f1;">
+                    <div class="progress-bar {% if is_risky %}bg-danger{% else %}bg-info{% endif %} fw-bold" 
+                        role="progressbar" 
+                        data-width="{{ saturation|default:0 }}">
+                        {{ saturation|default:0 }}% Saturation
+                    </div>
+                </div>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        var bar = document.querySelector('.progress-bar');
+                        if (bar) {
+                            var value = parseFloat(bar.dataset.width) || 0;
+                            bar.style.width = value + '%';
+                        }
+                    });
+                </script>
+                <p class="small text-muted mt-2">Preventing price crashes due to over-supply.</p>
+            </div>
+
+            <div class="alert {% if is_risky %}alert-warning{% else %}alert-success{% endif %} p-4 rounded-4 shadow-sm border-0">
+                <h4 class="fw-bold">🤖 AI Strategy Recommendation:</h4>
+                <p class="fs-5">{{ advice|default:"Processing market data..." }}</p>
+                <hr>
+                <h3 class="fw-bold mb-0">Recommended Action: Grow <span class="text-decoration-underline">{{ crop|default:"Calculating..." }}</span></h3>
+            </div>
+
+            <div class="row text-center mt-5 pt-4 border-top">
+                <div class="col-4 border-end"><h6>TEMP</h6><p class="fw-bold fs-4">{{ env.temp|default:"--" }}°C</p></div>
+                <div class="col-4 border-end"><h6>HUMIDITY</h6><p class="fw-bold fs-4">{{ env.humidity|default:"--" }}%</p></div>
+                <div class="col-4"><h6>SOIL PH</h6><p class="fw-bold fs-4">{{ farm.ph_level|default:"7.0" }}</p></div>
+            </div>
+
+            <div class="mt-5 d-flex justify-content-between">
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-lg px-4">Dashboard</a>
+                <button class="btn btn-success btn-lg px-5 shadow fw-bold" onclick="window.print()">Download Strategy</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

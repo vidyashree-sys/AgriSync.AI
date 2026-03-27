@@ -116,13 +116,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = 'login'
+
+
 # Where to go after login
 LOGIN_REDIRECT_URL = 'dashboard'
-
-# Where to go after logout
 LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = '/login/'
+
+
+
 
 
 WEATHER_API_KEY = '90fcee49eaede72114e1afdfa6e3ab35'

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="text-white mb-4">Add New Farm Profile</h2>
+    <div class="bento-card" style="background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1);">
+        <form method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-white">Farm Name</label>
+                    <input type="text" class="form-control bg-dark text-white border-secondary" name="farm_name" placeholder="e.g. North Field" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-white">Intended Crop</label>
+                    <input type="text" class="form-control bg-dark text-white border-secondary" name="intended_crop" placeholder="e.g. Rice" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-white">Latitude</label>
+                    <input type="number" step="any" class="form-control bg-dark text-white border-secondary" name="latitude" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label text-white">Longitude</label>
+                    <input type="number" step="any" class="form-control bg-dark text-white border-secondary" name="longitude" required>
+                </div>
+            </div>
+            
+            <hr class="border-secondary my-4">
+            <h5 class="text-success mb-3">Soil Composition (Optional)</h5>
+            
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label class="small text-white">Nitrogen (N)</label>
+                    <input type="number" class="form-control bg-dark text-white border-secondary" name="nitrogen" value="0">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="small text-white">Phosphorus (P)</label>
+                    <input type="number" class="form-control bg-dark text-white border-secondary" name="phosphorus" value="0">
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label class="small text-white">Potassium (K)</label>
+                    <input type="number" class="form-control bg-dark text-white border-secondary" name="potassium" value="0">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="small text-white">pH Level</label>
+                    <input type="number" step="0.1" class="form-control bg-dark text-white border-secondary" name="ph_level" value="7.0">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="small text-white">Soil Type</label>
+                    <input type="text" class="form-control bg-dark text-white border-secondary" name="soil_type" placeholder="e.g. Loamy / Clay">
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success px-5">Save Farm</button>
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary ms-2">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

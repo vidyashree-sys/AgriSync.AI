@@ -3,87 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriSync AI | Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <title>AgriSync.AI</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
     
     <style>
-        :root {
-            --bg-body: #01100d; --bg-sidebar: #022c22; --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 255, 255, 0.1); --text-main: #ffffff; --text-muted: #cbd5e1; --accent: #a3e635;
-        }
-        [data-theme="light"] {
-            --bg-body: #f8fafc; --bg-sidebar: #064e3b; --card-bg: #ffffff;
-            --card-border: #e2e8f0; --text-main: #0f172a; --text-muted: #64748b; --accent: #16a34a;
-        }
-        body { background-color: var(--bg-body); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; transition: 0.3s; margin: 0; }
-        h1, h2, h3, h4, h5, h6 { color: var(--text-main) !important; font-family: 'Space Grotesk', sans-serif; }
-        .text-muted { color: var(--text-muted) !important; font-weight: 500; }
-        .sidebar { width: 280px; height: 100vh; position: fixed; background: var(--bg-sidebar); border-right: 1px solid var(--card-border); z-index: 1050; transition: 0.3s; }
-        .main-content { margin-left: 280px; padding: 40px; min-height: 100vh; }
-        .bento-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 24px; padding: 24px; backdrop-filter: blur(10px); }
-        .nav-link { color: #ffffff !important; opacity: 0.8; padding: 12px 20px; margin: 5px 15px; border-radius: 12px; display: flex; align-items: center; gap: 12px; text-decoration: none; }
-        .nav-link.active { background: var(--accent); color: #022c22 !important; opacity: 1; font-weight: 700; }
-        .theme-btn { background: var(--card-bg); border: 1px solid var(--card-border); color: var(--text-main); border-radius: 50px; padding: 5px 15px; cursor: pointer; }
-        @media (max-width: 992px) { .sidebar { transform: translateX(-100%); } .sidebar.active { transform: translateX(0); display: flex !important; } .main-content { margin-left: 0; } }
+        body { background-color: #0f172a; color: white; font-family: 'Inter', sans-serif; }
+        .sidebar { background: rgba(255, 255, 255, 0.05); min-height: 100vh; padding: 20px; border-right: 1px solid rgba(255,255,255,0.1); }
+        .nav-link { color: #94a3b8; transition: 0.3s; margin-bottom: 10px; border-radius: 8px; }
+        .nav-link:hover, .nav-link.active { background: rgba(34, 197, 94, 0.1); color: #22c55e; }
+        .bento-card { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 20px; }
     </style>
 </head>
-<body data-theme="dark">
-    <div class="sidebar d-flex flex-column py-4 shadow" id="sidebar">
-        <div class="px-4 mb-5 text-white">
-            <h3 class="fw-bold m-0">AGRISYNC<span style="color: var(--accent)">.AI</span></h3>
-        </div>
-        <nav class="nav flex-column flex-grow-1">
-            <a href="{% url 'dashboard' %}" class="nav-link {% if 'dashboard' in request.path %}active{% endif %}">
-                <i class="bi bi-grid"></i> <span data-nav="dash">Dashboard</span>
-            </a>
-            <a href="{% url 'market_trends' %}" class="nav-link">
-                <i class="bi bi-graph-up"></i> <span data-nav="market">Market Analysis</span>
-            </a>
-            <a href="{% url 'disease_lab' %}" class="nav-link {% if 'disease-lab' in request.path %}active{% endif %}">
-                <i class="bi bi-bug"></i> <span data-nav="lab">AI Disease Lab</span>
-            </a>
-            <a href="{% url 'blockchain_ledger' %}" class="nav-link">
-                <i class="bi bi-shield-check"></i> <span data-nav="ledger">Secure Ledger</span>
-            </a>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block sidebar">
+            <h3 class="text-success fw-bold mb-4">AgriSync.AI</h3>
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'dashboard' %}">
+                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'market_trends' %}active{% endif %}" href="{% url 'market_trends' %}">
+                        <i class="bi bi-graph-up-arrow me-2"></i> Market Trends
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'disease_lab' %}active{% endif %}" href="{% url 'disease_lab' %}">
+                        <i class="bi bi-virus me-2"></i> Disease Lab
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.url_name == 'blockchain_ledger' %}active{% endif %}" href="{% url 'blockchain_ledger' %}">
+                        <i class="bi bi-shield-check me-2"></i> Ledger
+                    </a>
+                </li>
+            </ul>
         </nav>
-    </div>
 
-    <div class="main-content">
-        <div class="d-flex justify-content-between align-items-center mb-5">
-            <h2 class="fw-bold">Overview</h2>
-            <div class="d-flex gap-3">
-                <button class="theme-btn" onclick="toggleTheme()"><i id="theme-icon" class="bi bi-moon-stars"></i></button>
-                <select class="form-select bg-dark text-white border-secondary rounded-pill" id="langSelect" onchange="changeLanguage(this.value)" style="width: auto;">
-                    <option value="en-IN">English</option>
-                    <option value="hi-IN">हिन्दी</option>
-                    <option value="kn-IN">ಕನ್ನಡ</option>
-                </select>
-            </div>
-        </div>
-        {% block content %}{% endblock %}
+        <main class="col-md-10 ms-sm-auto px-md-4 py-4">
+            {% block content %}
+            {% endblock %}
+        </main>
     </div>
+</div>
 
-    <script>
-        const translations = {
-            'en-IN': { dash: "Dashboard", market: "Market Analysis", lab: "AI Disease Lab", ledger: "Secure Ledger" },
-            'hi-IN': { dash: "डैशबोर्ड", market: "बाज़ार विश्लेषण", lab: "रोग लैब", ledger: "सुरक्षित लेजर" },
-            'kn-IN': { dash: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್", market: "ಮಾರುಕಟ್ಟೆ", lab: "ರೋಗ ಲ್ಯಾಬ್", ledger: "ಲೆಡ್ಜರ್" }
-        };
-        function changeLanguage(lang) {
-            const data = translations[lang];
-            document.querySelectorAll('[data-nav]').forEach(el => {
-                const key = el.getAttribute('data-nav');
-                if (data[key]) el.innerText = data[key];
-            });
-        }
-        function toggleTheme() {
-            const body = document.body;
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            body.setAttribute('data-theme', isDark ? 'light' : 'dark');
-            document.getElementById('theme-icon').className = isDark ? 'bi bi-sun' : 'bi bi-moon-stars';
-        }
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
